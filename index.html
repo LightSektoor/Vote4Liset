@@ -432,7 +432,7 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
 <div id="vm" hidden><div class="box"><h3>Add a video</h3><p>Paste a YouTube or Vimeo link (these stay saved), or choose a file from your device (file videos only last until you close the page).</p><input id="vurl" placeholder="https://www.youtube.com/watch?v=..."><div class="row"><button id="vgo" type="button">Use link</button><button id="vfile" type="button">Choose file</button><button id="vx" type="button">Cancel</button></div></div></div>
 <script>
 document.documentElement.classList.add('js');
-const KEY='liset-site-edits-v1',main=document.querySelector('main'),foot=document.querySelector('footer'),PRISTINE=main.cloneNode(true),PF=foot.cloneNode(true);
+const KEY='liset-site-edits-v2',main=document.querySelector('main'),foot=document.querySelector('footer'),PRISTINE=main.cloneNode(true),PF=foot.cloneNode(true);
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){main.innerHTML=s.m;foot.innerHTML=s.f}}catch(e){}
 const links=[...document.querySelectorAll('[data-nav]')],menu=document.getElementById('menu'),burger=document.querySelector('.burger'),bar=document.getElementById('bar'),
  pages=()=>[...main.querySelectorAll('.page')],
