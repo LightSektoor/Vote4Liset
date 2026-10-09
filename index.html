@@ -122,15 +122,13 @@ footer .party{background:var(--sky)}
 #why .g2{grid-template-columns:1fr}
 #why .g2>.rise:has(>.ph){display:none}
 /* ---------- ADS ---------- */
-.gallery{display:grid;grid-template-columns:repeat(15,1fr);gap:22px}
-.gallery>*{grid-column:span 3}
-.gallery .wide{grid-column:span 3}.gallery .full{grid-column:span 15}.gallery .half{grid-column:span 5}
-.gallery figure:not(.full):not(.half) .ph{aspect-ratio:8.5/11}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.gallery figure .ph{aspect-ratio:8.5/11!important}
+.gallery .full,.gallery .half{display:none}
 .gallery figure{margin:0;transition:transform .3s}
 .gallery figure:hover{transform:translateY(-6px) rotate(-.6deg)}
 .gallery figcaption{margin-top:10px;font-size:.9rem;color:var(--muted)}
-@media(max-width:900px){.gallery>*,.gallery .wide{grid-column:span 5}}
-@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery>*,.gallery .wide,.gallery .half{grid-column:span 1}.gallery .full{grid-column:span 2}}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- ATTACK ---------- */
 .attack .band{background:linear-gradient(160deg,#050f2a,var(--navy) 70%)}
@@ -159,11 +157,20 @@ footer .logo{color:#fff;font-size:1.3rem}
 footer .tag{font-size:.9rem;border:2px dashed var(--sky);border-radius:12px;padding:8px 14px}
 
 /* ---------- TEMPORARY EDIT TOOLS (delete this block, #tools, #vm and #toast when finished) ---------- */
+#sv{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:rgba(7,21,51,.72);padding:20px}
+#sv[hidden]{display:none}
+#sv .box{background:var(--card);color:var(--ink);border-radius:22px;padding:26px;width:min(640px,100%);max-height:92vh;overflow:auto}
+#sv textarea{width:100%;height:260px;margin-top:12px;padding:12px;border-radius:12px;border:2px solid var(--sky);font:.85rem/1.5 ui-monospace,Menlo,monospace;color:#0a1f44;background:#fff;resize:vertical}
+#sv .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#sv button{font:700 .9rem var(--body);border:0;border-radius:999px;padding:11px 16px;cursor:pointer;background:var(--accent);color:#fff}
+#sv button.alt{background:#e6eefc;color:var(--navy)}
 #tools[hidden]{display:none}
+#tools #resetBtn,#tools #logoBtn{display:none!important}
+#ver{align-self:center;font:700 .7rem var(--body);color:#fff;opacity:.75;padding:0 6px}
 #tools{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;gap:8px}
 #tools button{font:700 .9rem var(--body);border:0;border-radius:999px;padding:12px 18px;cursor:pointer;box-shadow:var(--shadow);background:var(--accent);color:#fff;transition:transform .2s}
 #tools button:hover{transform:translateY(-2px)}
-#tools #undoBtn,#tools #logoBtn,#tools #resetBtn,#tools #lockBtn{background:#fff;color:var(--navy)}
+#tools #undoBtn,#tools #saveBtn,#tools #lockBtn{background:#fff;color:var(--navy)}
 body.editing #editBtn{background:var(--sky);color:var(--navy)}
 body.editing [contenteditable="true"]{cursor:text;border-radius:6px}
 body.editing [contenteditable="true"]:hover{outline:2px dashed var(--sky);outline-offset:4px}
@@ -259,7 +266,6 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
    <h2 class="title rise">About <em>Us</em></h2>
    <div class="intro">
     <div class="card rise">
-     <span class="hint">Your introduction goes here</span>
      <h3>Title goes here</h3>
      <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
@@ -289,20 +295,6 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
   </div>
  </section>
 
- <section class="block" style="padding-top:0">
-  <div class="wrap">
-   <h2 class="title rise">More <em>photos</em></h2>
-   <div class="grid g3">
-    <div class="rise"><div class="ph r34"><svg><use href="#i-img"/></svg><b>Photo</b><span>Add a photo</span></div></div>
-    <div class="rise"><div class="ph r34"><svg><use href="#i-img"/></svg><b>Photo</b><span>Add a photo</span></div></div>
-    <div class="rise"><div class="ph r34"><svg><use href="#i-img"/></svg><b>Photo</b><span>Add a photo</span></div></div>
-   </div>
-   <div class="grid g2" style="margin-top:24px">
-    <div class="card rise"><span class="hint">Bio section 4</span><h3>Heading goes here</h3><div class="lines"><i></i><i></i><i></i></div></div>
-    <div class="card rise"><span class="hint">Bio section 5</span><h3>Heading goes here</h3><div class="lines"><i></i><i></i><i></i></div></div>
-   </div>
-  </div>
- </section>
 </div>
 
 <!-- ================= WHY VOTE ================= -->
@@ -347,11 +339,6 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
     <figure class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Poster</b><span>Add a poster</span></div><figcaption>Caption goes here</figcaption></figure>
     <figure class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Poster</b><span>Add a poster</span></div><figcaption>Caption goes here</figcaption></figure>
     <figure class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Poster</b><span>Add a poster</span></div><figcaption>Caption goes here</figcaption></figure>
-    <figure class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Poster</b><span>Add a poster</span></div><figcaption>Caption goes here</figcaption></figure>
-    <figure class="full rise"><div class="ph r21"><svg><use href="#i-poster"/></svg><b>Banner ad</b><span>Wide banner or social graphic</span></div><figcaption>Caption goes here</figcaption></figure>
-    <figure class="half rise"><div class="ph r11"><svg><use href="#i-img"/></svg><b>Graphic</b><span>Square graphic</span></div></figure>
-    <figure class="half rise"><div class="ph r11"><svg><use href="#i-img"/></svg><b>Graphic</b><span>Square graphic</span></div></figure>
-    <figure class="half rise"><div class="ph r11"><svg><use href="#i-img"/></svg><b>Graphic</b><span>Square graphic</span></div></figure>
    </div>
   </div>
  </section>
@@ -378,11 +365,6 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
    <div class="slot rise">
     <div class="ph r85"><svg><use href="#i-poster"/></svg><b>Attack ad 3</b><span>Image or graphic</span></div>
     <div class="card"><span class="hint">Text for this ad</span><h3>Headline goes here</h3><div class="lines"><i></i><i></i><i></i></div></div>
-   </div>
-   <div class="grid g3">
-    <div class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Ad</b><span>Add an ad</span></div></div>
-    <div class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Ad</b><span>Add an ad</span></div></div>
-    <div class="rise"><div class="ph r85"><svg><use href="#i-poster"/></svg><b>Ad</b><span>Add an ad</span></div></div>
    </div>
   </div>
  </section>
@@ -425,20 +407,51 @@ body.editing [contenteditable="true"]:focus{outline:2px solid var(--accent);outl
 </footer>
 
 
-<div id="tools" hidden><button id="editBtn" type="button">Edit page</button><button id="undoBtn" type="button">Undo</button><button id="logoBtn" type="button">Change logo</button><button id="resetBtn" type="button">Reset</button><button id="lockBtn" type="button">Lock</button></div>
-<div id="lg" hidden><div class="box"><h3>Corner logo</h3><p>Choose an image for the logo in the top-left corner and footer. A square or wide image with a plain or transparent background looks best.</p><div class="row"><button id="lgpick" type="button">Choose image</button><button id="lgreset" type="button">Back to star</button><button id="lgx" type="button">Cancel</button></div></div></div>
+<div id="tools" hidden><button id="editBtn" type="button">Edit page</button><button id="undoBtn" type="button">Undo</button><button id="saveBtn" type="button">Save my edits</button><button id="lockBtn" type="button">Lock</button><span id="ver">v9</span></div>
 <div id="pw" hidden><div class="box"><h3>Editor login</h3><p>Enter the password to unlock editing.</p><input id="pwin" type="password" autocomplete="off" placeholder="Password"><div class="row"><button id="pwgo" type="button">Unlock</button><button id="pwx" type="button">Cancel</button></div></div></div>
 <div id="toast" role="status"></div>
+<div id="sv" hidden><div class="box"><h3>Save my edits</h3><p>Everything you typed is listed below. Copy it and paste it to Claude to put it in the real site. Photos can't be copied as text, so use <b>Download full site</b> to keep everything, photos included.</p><textarea id="svt" readonly></textarea><div class="row"><button id="svc" type="button">Copy text edits</button><button id="svd" type="button">Download full site</button><button id="svf" type="button" class="alt">Copy full site code</button><button id="svx" type="button" class="alt">Close</button></div></div></div>
 <div id="vm" hidden><div class="box"><h3>Add a video</h3><p>Paste a YouTube or Vimeo link (these stay saved), or choose a file from your device (file videos only last until you close the page).</p><input id="vurl" placeholder="https://www.youtube.com/watch?v=..."><div class="row"><button id="vgo" type="button">Use link</button><button id="vfile" type="button">Choose file</button><button id="vx" type="button">Cancel</button></div></div></div>
 <script>
 document.documentElement.classList.add('js');
-const KEY='liset-site-edits-v2',main=document.querySelector('main'),foot=document.querySelector('footer'),PRISTINE=main.cloneNode(true),PF=foot.cloneNode(true);
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s){main.innerHTML=s.m;foot.innerHTML=s.f}}catch(e){}
+const KEY='liset-site-edits-v4',main=document.querySelector('main'),foot=document.querySelector('footer'),PRISTINE=main.cloneNode(true),PF=foot.cloneNode(true);
+try{
+  const s=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(s){
+    /* one-time clean-ups of already-saved copies; each runs once, then its flag is set */
+    const mg=[
+     ['liset-mig-ads4',r=>{
+       const g=r.querySelector('#ads .gallery');if(!g)return;
+       g.querySelectorAll(':scope > figure.full,:scope > figure.half').forEach(x=>x.remove());
+       const f=[...g.querySelectorAll(':scope > figure')],l=f[f.length-1];
+       if(f.length>4&&!l.querySelector('img,iframe,video')&&(l.querySelector('figcaption')||{}).textContent==='Caption goes here'&&((l.querySelector('.ph b')||{}).textContent||'').trim()==='Poster')l.remove();
+     }],
+     ['liset-mig-attack3',r=>{
+       const ag=r.querySelector('#attack section .wrap > .g3');
+       if(ag&&!ag.querySelector('img,iframe,video'))ag.remove();
+     }],
+     ['liset-mig-meet2',r=>{
+       const g=r.querySelector('#meet .g3'),sec=g&&g.closest('section');if(!sec)return;
+       const dflt=/^(Text area \d+: )?click here and write your text\.$/i;
+       const plain=!sec.querySelector('img,iframe,video')&&[...sec.querySelectorAll('.g2 .card')].every(c=>/^Bio section [45]$/.test((c.querySelector('.hint')||{}).textContent||'')&&((c.querySelector('h3')||{}).textContent||'').trim()==='Heading goes here'&&[...c.querySelectorAll('.txt')].every(x=>!x.textContent.trim()||dflt.test(x.textContent.trim())));
+       if(plain)sec.remove();
+     }]
+    ].filter(m=>!localStorage.getItem(m[0]));
+    if(mg.length){
+      const t=document.createElement('template');t.innerHTML=s.m;
+      mg.forEach(m=>m[1](t.content));
+      s.m=t.innerHTML;localStorage.setItem(KEY,JSON.stringify(s));
+      mg.forEach(m=>localStorage.setItem(m[0],'1'));
+    }
+    main.innerHTML=s.m;foot.innerHTML=s.f;
+  }
+}catch(e){}
+main.querySelectorAll('#home .intro .hint').forEach(h=>{if(h.textContent.trim()==='Your introduction goes here')h.remove()});
 const links=[...document.querySelectorAll('[data-nav]')],menu=document.getElementById('menu'),burger=document.querySelector('.burger'),bar=document.getElementById('bar'),
  pages=()=>[...main.querySelectorAll('.page')],
  io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}):null;
-function go(){
-  const id=(location.hash||'#home').slice(1),all=pages(),p=all.find(x=>x.id===id)||all[0];
+function go(want){
+  const id=(typeof want==='string'?want:(location.hash||'#home').slice(1)),all=pages(),p=all.find(x=>x.id===id)||all[0];
   all.forEach(x=>x.classList.toggle('on',x===p));
   links.forEach(a=>a.getAttribute('href')==='#'+p.id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   document.title=p.dataset.title+' | Liset Quezada';
@@ -448,11 +461,21 @@ function go(){
   p.querySelectorAll('.rise').forEach((el,i)=>{el.classList.remove('in');el.style.transitionDelay=(i%4)*90+'ms';io?io.observe(el):el.classList.add('in')});
 }
 burger.addEventListener('click',()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
-addEventListener('hashchange',go);
+addEventListener('hashchange',()=>go());
+/* tabs work even where the page can't change its own URL (embedded/sandboxed viewers) */
+document.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a[href^="#"]');
+  if(!a)return;
+  const id=a.getAttribute('href').slice(1);
+  if(!id||!pages().some(x=>x.id===id))return;
+  e.preventDefault();
+  try{history.replaceState(null,'','#'+id)}catch(err){}
+  go(id);
+});
 
 /* ---- temporary edit tools ---- */
 const EDIT='h1,h2,h3,figcaption,.hint,.tag,.office,.party,.vote,.ph b,.ph span,.vid p,.pagehead p,.txt',
- eb=document.getElementById('editBtn'),rb=document.getElementById('resetBtn'),tt=document.getElementById('toast'),
+ eb=document.getElementById('editBtn'),tt=document.getElementById('toast'),
  vm=document.getElementById('vm'),vu=document.getElementById('vurl'),fi=document.createElement('input'),vf=document.createElement('input');
 let target=null,timer;
 fi.type='file';fi.accept='image/*';vf.type='file';vf.accept='video/*';
@@ -499,13 +522,8 @@ function fill(ph,el){
 const COLL=[
  {cont:'#why .g3',item:'.card',label:'Add reason card'},
  {cont:'#meet .bio > .grid',item:'.card',label:'Add bio section'},
- {cont:'#meet .g3',item:'.rise',label:'Add photo'},
- {cont:'#meet .g2',item:'.card',label:'Add bio section'},
  {cont:'#ads .gallery',item:'figure:not(.full):not(.half)',label:'Add poster',first:1},
- {cont:'#ads .gallery',item:'figure.half',label:'Add square graphic'},
- {cont:'#ads .gallery',item:'figure.full',label:'Add wide banner'},
- {cont:'#attack section .wrap',item:'.slot',label:'Add ad with text',anchor:'.g3'},
- {cont:'#attack .g3',item:'.rise',label:'Add ad poster'},
+ {cont:'#attack section .wrap',item:'.slot',label:'Add ad with text'},
  {cont:'#videos .g2',item:'.vid',label:'Add video'}
 ],
 TPL=COLL.map(c=>{const co=PRISTINE.querySelector(c.cont),it=co&&co.querySelector(':scope > '+c.item);return it?it.outerHTML:''});
@@ -569,10 +587,6 @@ function setEdit(on){
 }
 eb.onclick=()=>setEdit(!editing());
 document.getElementById('undoBtn').onclick=undo;
-rb.onclick=()=>{
-  if(rb.dataset.arm){try{localStorage.removeItem(KEY);localStorage.removeItem(LKEY)}catch(e){}location.reload()}
-  else{rb.dataset.arm=1;rb.textContent='Tap again to erase all edits';setTimeout(()=>{delete rb.dataset.arm;rb.textContent='Reset'},3500)}
-};
 document.addEventListener('click',e=>{
   const rmb=e.target.closest('.rm');
   if(rmb){e.preventDefault();rmb.parentElement.remove();save();toast('Removed. Tap Undo to bring it back');return}
@@ -620,30 +634,65 @@ function typeOf(el){
 }
 function slots(root){const c={},out=[];root.querySelectorAll(SLOT).forEach(el=>{const t=typeOf(el);c[t]=(c[t]||0)+1;out.push({t,n:c[t],el})});return out}
 /* ---- changeable corner logo ---- */
-const LKEY='liset-site-logo-v1',lg=document.getElementById('lg'),lf=document.createElement('input');
-lf.type='file';lf.accept='image/*';
+const LKEY='liset-site-logo-v1';
 function applyLogo(){
-  let src=null;try{src=localStorage.getItem(LKEY)}catch(e){}
+  let src=null;
   document.querySelectorAll('.logo i').forEach(i=>{
     if(src){i.classList.add('has-img');i.textContent='';i.append(mk('img',{src,alt:'Campaign logo'}))}
     else{i.classList.remove('has-img');i.textContent='\u2605'}
   });
 }
-document.getElementById('logoBtn').onclick=()=>{lg.hidden=false};
-document.getElementById('lgx').onclick=()=>{lg.hidden=true};
-document.getElementById('lgpick').onclick=()=>lf.click();
-document.getElementById('lgreset').onclick=()=>{try{localStorage.removeItem(LKEY)}catch(e){}applyLogo();lg.hidden=true;toast('Logo reset')};
-lf.onchange=()=>{
-  const f=lf.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{const im=new Image();im.onload=()=>{
-    const k=Math.min(1,400/Math.max(im.width,im.height)),c=document.createElement('canvas');
-    c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
-    c.getContext('2d').drawImage(im,0,0,c.width,c.height);
-    try{localStorage.setItem(LKEY,c.toDataURL('image/png'));applyLogo();lg.hidden=true;toast('Logo updated')}
-    catch(e){toast('Could not save that logo. Try a smaller image.')}
-  };im.src=r.result};
-  r.readAsDataURL(f);lf.value='';
+/* ---- save / copy my edits ---- */
+const SVSEL='h1,h2,h3,figcaption,.hint,.tag,.office,.party,.vote,.vid p,.pagehead p,.txt,.ph b,.ph span',
+ SV=document.getElementById('sv'),svt=document.getElementById('svt');
+function svKind(e){return e.matches('h1,h2,h3')?'Heading':e.matches('figcaption')?'Caption':e.matches('.pagehead p')?'Intro line':e.matches('.vid p')?'Description':e.matches('.txt')?'Text':e.matches('.vote,.party')?'Button/badge':'Label'}
+const SVNUM='h1,h2,h3,figcaption,.hint,.tag,.office,.party,.vote,.vid p,.pagehead p,.txt';
+function svTexts(root,base,pre){
+  const out=[],nums=[...root.querySelectorAll(SVNUM)],pn=pre?[...pre.querySelectorAll(SVNUM)]:[];
+  root.querySelectorAll(SVSEL).forEach(e=>{
+    const t=e.textContent.trim().replace(/\s+\n/g,'\n');
+    if(!t||base.has(t)||DEF.test(t))return;
+    const i=nums.indexOf(e);
+    if(i<0){out.push('Photo-box text: '+t);return}
+    const c=pn[i],was=c&&c.tagName===e.tagName&&c.className===e.className?c.textContent.trim().replace(/\s+/g,' ').slice(0,45):'';
+    out.push(svKind(e)+' #'+(i+1)+(was?' (replaces: "'+was+'")':'')+': '+t);
+  });
+  return out;
+}
+function svSummary(){
+  const base=new Set([...PRISTINE.querySelectorAll(SVSEL),...PF.querySelectorAll(SVSEL)].map(e=>e.textContent.trim()));
+  const lines=[];
+  pages().forEach(pg=>{
+    const items=svTexts(pg,base,PRISTINE.querySelector('#'+pg.id));
+    const before=PRISTINE.querySelector('#'+pg.id),n0=before?before.querySelectorAll('.ph.filled').length:0,n1=pg.querySelectorAll('.ph.filled').length;
+    if(n1>n0)items.push('(Photos/videos added here: '+(n1-n0)+'. These are not in this text, so use Download full site or send the files separately.)');
+    if(items.length)lines.push('== '+pg.dataset.title+' ==\n'+items.join('\n\n')+'\n');
+  });
+  const fi2=svTexts(foot,base,PF);
+  if(fi2.length)lines.push('== Footer ==\n'+fi2.join('\n\n')+'\n');
+  return lines.length?'(Numbers count the text spots on each tab from top to bottom.)\n\n'+lines.join('\n'):'No text edits yet. Turn on Edit page, change some text, then open this again.';
+}
+function fullHTML(){
+  const d=ser(),c=document.documentElement.cloneNode(true);
+  c.querySelector('main').innerHTML=d.m;c.querySelector('footer').innerHTML=d.f;
+  c.querySelector('body').classList.remove('editing');
+  c.querySelectorAll('.logo i').forEach(i=>{i.classList.remove('has-img');i.textContent='\u2605'});
+  c.querySelectorAll('[contenteditable]').forEach(x=>x.removeAttribute('contenteditable'));
+  ['sv','vm','pw','lg','tools'].forEach(id=>{const x=c.querySelector('#'+id);if(x)x.setAttribute('hidden','')});
+  const t=c.querySelector('#toast');if(t)t.classList.remove('show');
+  return '<!DOCTYPE html>\n'+c.outerHTML;
+}
+function svCopy(text,msg){
+  const done=()=>toast(msg),old=()=>{const t=document.createElement('textarea');t.value=text;t.style.cssText='position:fixed;left:-9999px';document.body.append(t);t.select();try{document.execCommand('copy');done()}catch(e){toast('Could not copy. Select the text and copy it yourself.')}t.remove()};
+  try{navigator.clipboard.writeText(text).then(done,old)}catch(e){old()}
+}
+document.getElementById('saveBtn').onclick=()=>{try{save()}catch(e){}svt.value=svSummary();SV.hidden=false;svt.focus();svt.select()};
+document.getElementById('svx').onclick=()=>{SV.hidden=true};
+document.getElementById('svc').onclick=()=>svCopy(svt.value,'Copied your text edits');
+document.getElementById('svf').onclick=()=>svCopy(fullHTML(),'Copied the full site code');
+document.getElementById('svd').onclick=()=>{
+  try{const b=new Blob([fullHTML()],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='index.html';document.body.append(a);a.click();a.remove();toast('Downloading index.html')}
+  catch(e){toast('Download blocked here. Use Copy full site code instead.')}
 };
 applyLogo();
 
