@@ -232,6 +232,38 @@ body:not(.editing) #ads .gallery .ph img{cursor:zoom-in}
 body.editing .reason .txt{position:static;opacity:1;visibility:visible;transform:none;pointer-events:auto;margin-top:14px;min-height:5em;padding:0;border:0;box-shadow:none;background:none}
 body.editing #why .card.reason{height:auto;justify-content:flex-start;padding-top:44px}
 body.editing .reason h3{cursor:text}
+
+/* ---------- PHONE & TOUCH TWEAKS (computers are not affected) ---------- */
+html{-webkit-text-size-adjust:100%}
+a,button{touch-action:manipulation}
+@media(hover:none){
+ .card:hover{transform:none;box-shadow:var(--shadow)}
+ .gallery figure:hover{transform:none}
+ nav a:hover{transform:none}
+ .vote:hover{transform:none}
+}
+@media(max-width:620px){
+ nav a{font-size:2.8vw;padding:.8em .3em}
+ header .wrap{padding:6px 0 8px}
+ .hero{padding:28px 0 44px}
+ .pagehead{padding:34px 0 40px}
+ section.block{padding:36px 0}
+ .title{margin-bottom:18px}
+ .card,#speech .card{padding:20px}
+ #speech .txt{font-size:1rem;min-height:12em}
+ .ph b{font-size:1.1rem}
+ .ph span{font-size:.78rem}
+ .ph svg{width:34px;height:34px}
+ .play{width:60px;height:60px}
+ .play svg{width:26px;height:26px}
+ .ph.vcard b{font-size:1.4rem}
+ .up{font-size:.72rem;padding:8px 12px;max-width:92%}
+ .cta{padding:30px 18px}
+ footer .wrap{justify-content:center;text-align:center}
+ #tools{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+ #tools button{padding:10px 14px;font-size:.82rem}
+ .addrow button{padding:9px 14px;font-size:.82rem}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rise{opacity:1;transform:none}}
 </style>
 </head>
