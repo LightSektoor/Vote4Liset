@@ -1057,17 +1057,18 @@ document.addEventListener('click',e=>{
   s.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px';
   a.append(s);setTimeout(()=>s.remove(),650);
 });
-let kb='';
-document.addEventListener('keydown',e=>{
-  if(editing()||e.key.length!==1)return;
-  if(e.target.closest&&e.target.closest('input,textarea,[contenteditable]'))return;
-  kb=(kb+e.key.toLowerCase()).slice(-4);
-  if(kb==='vote'){
-    kb='';
-    for(let i=0;i<6;i++)setTimeout(()=>burst(Math.random()*innerWidth,Math.random()*innerHeight*.5+40,34),i*180);
-    toast('Vote Liset!');
-  }
+/* ===== EASTER EGG + TAB CONFETTI (delete this block to remove) ===== */
+document.addEventListener('dblclick',e=>{
+  if(editing()||calm)return;
+  const h=e.target.closest('.hero h1');if(!h)return;
+  h.animate([{transform:'rotate(0) scale(1)'},{transform:'rotate(-3deg) scale(1.06)'},{transform:'rotate(3deg) scale(1.06)'},{transform:'rotate(-2deg) scale(1.03)'},{transform:'rotate(0) scale(1)'}],{duration:700,easing:'ease-in-out'});
+  burst(e.clientX,e.clientY,24);
 });
+document.addEventListener('click',e=>{
+  if(e.target.closest('nav a'))burst(e.clientX,e.clientY,34);
+});
+/* ===== END EASTER EGGS ===== */
+
 /* ===== END MORE FUN EXTRAS ===== */
 
 /* ===== END FUN EXTRAS ===== */
